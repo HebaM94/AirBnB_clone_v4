@@ -37,23 +37,51 @@ $(document).ready(function() {
         }
     });
 
-    let checkedItems = {};
-    $('input[type="checkbox"]').change(function() {
-        let amenityId = $(this).attr('data-id');
-        let amenityName = $(this).attr('data-name');
+    let checkedAmenities = {};
+    let checkedStates = {};
+    let checkedCities = {};
 
-        if (this.checked) {
-            checkedItems[amenityId] = amenityName;
+    $('input[type="checkbox"]').change(function() {
+        let itemType = $(this).parent().parent().parent().hasClass('locations') ? 'location' : 'amenity';
+        let itemId = $(this).attr('data-id');
+        let itemName = $(this).attr('data-name');
+
+        if (itemType === 'location') {
+            if ($(this).parent().parent().hasClass('states')) {
+                if (this.checked) {
+                    checkedStates[itemId] = itemName;
+                } else {
+                    delete checkedStates[itemId];
+                }
+            } else {
+                if (this.checked) {
+                    checkedCities[itemId] = itemName;
+                } else {
+                    delete checkedCities[itemId];
+                }
+            }
         } else {
-            delete checkedItems[amenityId];
+            if (this.checked) {
+                checkedAmenities[itemId] = itemName;
+            } else {
+                delete checkedAmenities[itemId];
+            }
         }
 
         let amenitiesList = Object.values(checkedItems).join(', ');
         $('div.amenities h4').text(amenitiesList);
+
+        let statesList = Object.values(checkedStates).join(', ');
+        let citiesList = Object.values(checkedCities).join(', ');
+        $('div.locations h4').text(statesList + (statesList && citiesList ? ', ' : '') + citiesList);
     });
 
     $('button').click(function() {
-        let amenities = Object.keys(checkedItems);
-        searchPlaces(amenities);
+        let amenities = Object.keys(checkedAmenities);
+        let states = Object.keys(checkedStates);
+        let cities = Object.keys(checkedCities);
+
+        searchPlaces({ amenities: amenities, states: states, cities: cities });
+
     });
 });
