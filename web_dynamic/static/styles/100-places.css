@@ -34,6 +34,63 @@ article h2{
     margin-top: 0px;
     padding-left: 0%;
 }
+
+.article {
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.article .title_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.article .information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.article .description {
+    margin-top: 20px;
+}
+
+.article .amenities,
+.article .reviews {
+    margin-top: 40px;
+}
+
+.article .amenities h2,
+.article .reviews h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.article .amenities ul,
+.article .reviews ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article .amenities li,
+.article .reviews li {
+    margin-top: 10px;
+}
+
+.article .reviews .toggle-reviews {
+    cursor: pointer;
+    color: #007BFF;
+}
+
 .data{
     width: 100%;
 }
